@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mr. Akash Pharande | Pharande Spaces</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D08A;
+    --gold-dark: #8B6914;
+    --black: #0A0A0A;
+    --off-black: #111111;
+    --dark: #1A1714;
+    --mid: #2C2820;
+    --text: #E8E0D0;
+    --muted: #9A9080;
+    --white: #FAF8F4;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 60px;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,168,76,0.08) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 80% at 20% 70%, rgba(201,168,76,0.04) 0%, transparent 60%),
+      linear-gradient(160deg, #0A0A0A 0%, #1A1510 50%, #0D0C0A 100%);
+  }
+  .hero-bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    top: -20%; left: 60%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.15); opacity: 1; }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    max-width: 900px; padding: 0 40px;
+    animation: fadeUp 1.2s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '—';
+    margin: 0 12px;
+    opacity: 0.5;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s both;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-title {
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s both;
+  }
+
+  .hero-divider {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 48px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s both;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    color: var(--text);
+    opacity: 0.7;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.1s both;
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted);
+    animation: fadeUp 1s ease 1.4s both, bounce 2s ease 2.4s infinite;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .hero-scroll::after {
+    content: '';
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 120px 60px; }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+  .section-heading em { font-style: italic; color: var(--gold); }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--off-black);
+    position: relative;
+    overflow: hidden;
+  }
+  .about::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .about-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .about-credentials {
+    display: flex; flex-direction: column; gap: 24px;
+    margin-top: 40px;
+  }
+  .credential {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 20px 24px;
+    border: 1px solid rgba(201,168,76,0.15);
+    border-left: 2px solid var(--gold);
+    background: rgba(201,168,76,0.03);
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .credential:hover {
+    background: rgba(201,168,76,0.06);
+    border-color: rgba(201,168,76,0.4);
+  }
+  .credential-icon {
+    font-size: 1.4rem; margin-top: 2px;
+  }
+  .credential-text strong {
+    display: block;
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 4px; font-weight: 500;
+  }
+  .credential-text span {
+    font-size: 0.9rem; color: var(--muted);
+  }
+
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  }
+  .stat-card {
+    background: var(--dark);
+    padding: 48px 40px;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .stat-card:hover { background: var(--mid); }
+  .stat-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .stat-card:hover::before { opacity: 1; }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300;
+    color: var(--gold); line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-number sup { font-size: 1.5rem; }
+  .stat-label {
+    font-size: 0.75rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--muted);
+  }
+
+  /* ── VISION ── */
+  .vision {
+    background: var(--black);
+    position: relative;
+  }
+  .vision-inner {
+    max-width: 1200px; margin: 0 auto;
+  }
+  .vision-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 80px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .vision-header .section-heading { margin-bottom: 0; max-width: 600px; }
+
+  .pillars {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(201,168,76,0.1);
+  }
+  .pillar {
+    background: var(--black);
+    padding: 56px 40px;
+    position: relative; overflow: hidden;
+    transition: background 0.4s;
+  }
+  .pillar:hover { background: var(--dark); }
+  .pillar-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; font-weight: 300;
+    color: rgba(201,168,76,0.1);
+    line-height: 1;
+    position: absolute; top: 20px; right: 30px;
+    transition: color 0.4s;
+  }
+  .pillar:hover .pillar-number { color: rgba(201,168,76,0.2); }
+  .pillar-icon {
+    font-size: 2rem; margin-bottom: 24px;
+  }
+  .pillar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400;
+    color: var(--white); margin-bottom: 16px;
+  }
+  .pillar-desc {
+    font-size: 0.875rem; line-height: 1.8;
+    color: var(--muted);
+  }
+
+  /* ── QUOTE ── */
+  .quote-section {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+    padding: 100px 60px;
+    position: relative; overflow: hidden;
+  }
+  .quote-section::before {
+    content: '\201C';
+    position: absolute;
+    top: -40px; left: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30rem; font-weight: 300;
+    color: rgba(201,168,76,0.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .quote-inner {
+    max-width: 900px; margin: 0 auto; text-align: center;
+    position: relative; z-index: 2;
+  }
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-style: italic; font-weight: 300;
+    color: var(--white); line-height: 1.6;
+    margin-bottom: 36px;
+  }
+  .quote-attr {
+    font-size: 0.7rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
+  }
+
+  /* ── PROJECTS ── */
+  .projects {
+    background: var(--off-black);
+  }
+  .projects-inner { max-width: 1200px; margin: 0 auto; }
+
+  .projects-tabs {
+    display: flex; gap: 0; margin-bottom: 56px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .tab-btn {
+    background: none; border: none; cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); padding: 16px 32px;
+    position: relative; transition: color 0.3s;
+  }
+  .tab-btn.active { color: var(--gold); }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 2px; background: var(--gold);
+  }
+  .tab-btn:hover { color: var(--text); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(201,168,76,0.08); }
+
+  .project-card {
+    background: var(--off-black);
+    padding: 40px 36px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .project-card:hover { background: var(--dark); }
+  .project-tag {
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .project-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .project-location {
+    font-size: 0.8rem; color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .project-details {
+    font-size: 0.8rem; color: var(--muted);
+    line-height: 1.7; border-top: 1px solid rgba(201,168,76,0.1);
+    padding-top: 16px; margin-top: 16px;
+  }
+  .project-highlight {
+    display: inline-block;
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold-dark);
+    background: rgba(201,168,76,0.1);
+    padding: 4px 10px; margin-top: 12px;
+  }
+
+  /* ── LEADERSHIP ── */
+  .leadership {
+    background: var(--black);
+  }
+  .leadership-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.5fr; gap: 100px;
+    align-items: start;
+  }
+  .leadership-left { position: sticky; top: 120px; }
+
+  .contributions {
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .contribution {
+    display: flex; gap: 28px;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+  .contribution:hover { opacity: 1; }
+  .contribution-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem; color: var(--gold);
+    min-width: 28px; padding-top: 4px;
+  }
+  .contribution-body strong {
+    display: block;
+    font-size: 0.95rem; font-weight: 500;
+    color: var(--text); margin-bottom: 8px;
+  }
+  .contribution-body p {
+    font-size: 0.875rem; line-height: 1.7; color: var(--muted);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 60px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 300;
+    color: var(--gold); letter-spacing: 0.1em;
+  }
+  .footer-brand span { display: block; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .footer-note {
+    font-size: 0.75rem; letter-spacing: 0.1em;
+    color: var(--muted); text-align: right;
+  }
+  .gold-line {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+    margin-bottom: 0;
+    opacity: 0.3;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .about-inner, .leadership-inner { grid-template-columns: 1fr; gap: 60px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .pillars { grid-template-columns: 1fr; }
+    .tab-content.active { grid-template-columns: 1fr; }
+    .vision-header { flex-direction: column; gap: 24px; }
+    .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+    .footer-note { text-align: center; }
+    .leadership-left { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Pharande Spaces</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#vision">Vision</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Managing Director</span>
+    <h1 class="hero-name">Akash <em>Pharande</em></h1>
+    <p class="hero-title">Pharande Spaces &nbsp;·&nbsp; Maharashtra's Premier Township Developer</p>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">Visionary Leader Driving the Future of Integrated Townships</p>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-text reveal">
+      <p class="section-label">About</p>
+      <h2 class="section-heading">Building Communities<br>That <em>Endure</em></h2>
+      <p>Mr. Akash Pharande has been a driving force behind transforming Pharande Spaces into one of <strong>Maharashtra's most trusted real estate developers</strong>. With over 11 years of experience, he has pioneered the concept of integrated township development.</p>
+      <p>His approach goes beyond construction — it is about creating <strong>sustainable environments</strong> where families can live, grow, and prosper. From digital sales systems to advanced project execution strategies, he has transformed the organization into a future-ready real estate brand.</p>
+      <div class="about-credentials">
+        <div class="credential">
+          <div class="credential-icon">🎓</div>
+          <div class="credential-text">
+            <strong>IIM Bangalore</strong>
+            <span>Master's Degree · Business Management</span>
+          </div>
+        </div>
+        <div class="credential">
+          <div class="credential-icon">📊</div>
+          <div class="credential-text">
+            <strong>Pune University</strong>
+            <span>MBA · Finance</span>
+          </div>
+        </div>
+        <div class="credential">
+          <div class="credential-icon">🏙️</div>
+          <div class="credential-text">
+            <strong>11+ Years Experience</strong>
+            <span>Real Estate · Township Development</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <div class="stat-number">11<sup>+</sup></div>
+        <div class="stat-label">Years of Excellence</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2400<sup>+</sup></div>
+        <div class="stat-label">Units Delivered</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">247</div>
+        <div class="stat-label">Acres Under Dev.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">8<sup>+</sup></div>
+        <div class="stat-label">Landmark Projects</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="vision" id="vision">
+  <div class="vision-inner">
+    <div class="vision-header reveal">
+      <div>
+        <p class="section-label">Vision</p>
+        <h2 class="section-heading">A Vision Beyond<br><em>Boundaries</em></h2>
+      </div>
+      <p style="max-width:340px; font-size:0.875rem; line-height:1.9; color:var(--muted);">
+        Pharande Spaces is set to become the go-to brand for integrated township developments across India, with a strong presence planned in the Middle East.
+      </p>
+    </div>
+    <div class="pillars reveal">
+      <div class="pillar">
+        <div class="pillar-number">01</div>
+        <div class="pillar-icon">🏗️</div>
+        <h3 class="pillar-title">Innovation First</h3>
+        <p class="pillar-desc">Early adoption of digital technologies and PropTech solutions. From AI-driven sales systems to smart project execution, every process is reimagined for the future.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">02</div>
+        <div class="pillar-icon">🌿</div>
+        <h3 class="pillar-title">Sustainability</h3>
+        <p class="pillar-desc">Ultra-modern residential townships designed to improve quality of life — sustainable environments built for generations to live, grow, and prosper.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">03</div>
+        <div class="pillar-icon">🌐</div>
+        <h3 class="pillar-title">Global Outlook</h3>
+        <p class="pillar-desc">International concepts in township development researched and adapted for the Indian context, with a growing vision toward the Middle East market.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <div class="quote-inner reveal">
+    <p class="quote-text">"The real fun is seeing your hard work pay off in surprising ways you've never even thought of."</p>
+    <p class="quote-attr">— Akash Pharande, Managing Director, Pharande Spaces</p>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="projects-inner">
+    <div class="reveal">
+      <p class="section-label">Portfolio</p>
+      <h2 class="section-heading" style="margin-bottom:48px;">Landmark <em>Projects</em></h2>
+    </div>
+    <div class="projects-tabs reveal">
+      <button class="tab-btn active" onclick="switchTab('completed', this)">Completed</button>
+      <button class="tab-btn" onclick="switchTab('ongoing', this)">Ongoing</button>
+    </div>
+
+    <div class="tab-content active" id="tab-completed">
+      <div class="project-card">
+        <p class="project-tag">Residential Township</p>
+        <h3 class="project-name">Woodsville</h3>
+        <p class="project-location">Phase I & II · Moshi, PCMC</p>
+        <div class="project-details">2, 2.5 & 3 BHK Residences<br>8,86,533 sq. ft. | 1,200 Units</div>
+        <span class="project-highlight">Completed</span>
+      </div>
+      <div class="project-card">
+        <p class="project-tag">Premium Apartments</p>
+        <h3 class="project-name">Celestial City</h3>
+        <p class="project-location">Phase I & II · Ravet, Pune</p>
+        <div class="project-details">1, 2 & 3 BHK Apartments<br>9,54,710 sq. ft. | 1,200 Units</div>
+        <span class="project-highlight">Completed</span>
+      </div>
+      <div class="project-card">
+        <p class="project-tag">Residential</p>
+        <h3 class="project-name">Guruvihar</h3>
+        <p class="project-location">Moshi Pradhikaran</p>
+        <div class="project-details">1, 2 & 3 BHK Homes</div>
+        <span class="project-highlight">Completed</span>
+      </div>
+      <div class="project-card">
+        <p class="project-tag">Premium Row Houses</p>
+        <h3 class="project-name">Samarth Nagari</h3>
+        <p class="project-location">Pradhikaran</p>
+        <div class="project-details">Exclusive Row House Community</div>
+        <span class="project-highlight">Completed</span>
+      </div>
+      <div class="project-card">
+        <p class="project-tag">Luxury Bungalows</p>
+        <h3 class="project-name">Culture Crest</h3>
+        <p class="project-location">Sector 6, Pradhikaran</p>
+        <div class="project-details">Luxury 3 & 5 BHK Bungalows</div>
+        <span class="project-highlight">Completed</span>
+      </div>
+      <div class="project-card">
+        <p class="project-tag">Retail & Entertainment</p>
+        <h3 class="project-name">City One Mall</h3>
+        <p class="project-location">Pimpri, Pune</p>
+        <div class="project-details">Retail & Entertainment Destination</div>
+        <span class="project-highlight">Completed</span>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-ongoing">
+      <div class="project-card">
+        <p class="project-tag">Luxury Villas</p>
+        <h3 class="project-name">Vaarivana</h3>
+        <p class="project-location">Urse Central</p>
+        <div class="project-details">247 Acres of Luxurious Villas</div>
+        <span class="project-highlight" style="background:rgba(76,201,120,0.1);color:#4CC97A;">Ongoing</span>
+      </div>
+      <div class="project-card">
+        <p class="project-tag">Premium Apartments</p>
+        <h3 class="project-name">Puneville</h3>
+        <p class="project-location">Punawale · Pune-Mumbai Highway</p>
+        <div class="project-details">Premium Apartments</div>
+        <span class="project-highlight" style="background:rgba(76,201,120,0.1);color:#4CC97A;">Ongoing</span>
+      </div>
+      <div class="project-card">
+        <p class="project-tag">Modern Apartments</p>
+        <h3 class="project-name">Kairosa</h3>
+        <p class="project-location">Punawale</p>
+        <div class="project-details">Modern 1 & 2 BHK Apartments</div>
+        <span class="project-highlight" style="background:rgba(76,201,120,0.1);color:#4CC97A;">Ongoing</span>
+      </div>
+      <div class="project-card">
+        <p class="project-tag">Contemporary Living</p>
+        <h3 class="project-name">Felicity</h3>
+        <p class="project-location">Near Ravet Aundh Road</p>
+        <div class="project-details">Contemporary Apartments</div>
+        <span class="project-highlight" style="background:rgba(76,201,120,0.1);color:#4CC97A;">Ongoing</span>
+      </div>
+      <div class="project-card">
+        <p class="project-tag">Luxury Residences</p>
+        <h3 class="project-name">Woodsville</h3>
+        <p class="project-location">Moshi</p>
+        <div class="project-details">Luxury Residences — Next Phase</div>
+        <span class="project-highlight" style="background:rgba(76,201,120,0.1);color:#4CC97A;">Ongoing</span>
+      </div>
+      <div class="project-card">
+        <p class="project-tag">Commercial</p>
+        <h3 class="project-name">Prowess</h3>
+        <p class="project-location">Off Spine Road, Moshi</p>
+        <div class="project-details">Premium Commercial Spaces</div>
+        <span class="project-highlight" style="background:rgba(76,201,120,0.1);color:#4CC97A;">Ongoing</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="leadership" id="leadership">
+  <div class="leadership-inner">
+    <div class="leadership-left reveal">
+      <p class="section-label">Leadership</p>
+      <h2 class="section-heading">Contributions<br>That <em>Define</em><br>an Era</h2>
+      <p style="font-size:0.875rem; line-height:1.9; color:var(--muted); margin-top:24px;">
+        With a relentless pursuit of excellence, Mr. Pharande continues to shape the future of integrated township development while positioning Pharande Spaces as a benchmark in the Indian real estate industry.
+      </p>
+    </div>
+
+    <div class="contributions reveal">
+      <div class="contribution">
+        <div class="contribution-num">01</div>
+        <div class="contribution-body">
+          <strong>Pioneered Integrated Township Planning</strong>
+          <p>Conceptualized and executed some of Pune's largest integrated township developments, setting new benchmarks in community living.</p>
+        </div>
+      </div>
+      <div class="contribution">
+        <div class="contribution-num">02</div>
+        <div class="contribution-body">
+          <strong>Digital Marketing & Sales Transformation</strong>
+          <p>Introduced modern digital marketing and sales processes, transforming how real estate is marketed and sold in Maharashtra.</p>
+        </div>
+      </div>
+      <div class="contribution">
+        <div class="contribution-num">03</div>
+        <div class="contribution-body">
+          <strong>Finance & Licensing Operations</strong>
+          <p>Led licensing, finance, and project sanctioning operations — ensuring regulatory compliance while driving aggressive growth timelines.</p>
+        </div>
+      </div>
+      <div class="contribution">
+        <div class="contribution-num">04</div>
+        <div class="contribution-body">
+          <strong>Operational Modernization</strong>
+          <p>Implemented end-to-end modernization across operational systems, enabling Pharande Spaces to operate with the efficiency of a future-ready enterprise.</p>
+        </div>
+      </div>
+      <div class="contribution">
+        <div class="contribution-num">05</div>
+        <div class="contribution-body">
+          <strong>International Concept Adoption</strong>
+          <p>Researched and adapted global best practices in township development to create world-class communities uniquely suited to the Indian context.</p>
+        </div>
+      </div>
+      <div class="contribution">
+        <div class="contribution-num">06</div>
+        <div class="contribution-body">
+          <strong>Organizational Growth Leadership</strong>
+          <p>Contributed significantly to the overall growth of Pharande Spaces through strategic vision, team building, and delivering on ambitious milestones.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECOND QUOTE -->
+<div class="quote-section" style="background: linear-gradient(135deg, #0A0A0A 0%, #1A1510 100%);">
+  <div class="quote-inner reveal">
+    <p class="quote-text">"The price of success is hard work, dedication to the job at hand, and the determination that whether we win or lose, we have applied the best of ourselves."</p>
+    <p class="quote-attr">— Akash Pharande</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="gold-line"></div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      Pharande Spaces
+      <span>Integrated Township Developers · Maharashtra</span>
+    </div>
+    <div class="footer-note">
+      Mr. Akash Pharande<br>
+      Managing Director<br>
+      <span style="color:var(--gold); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase;">IIM Bangalore · Pune University</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Tab switching
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
+
